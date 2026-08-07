@@ -5,7 +5,6 @@ namespace LaravelUpstashSearch\Scout;
 use Illuminate\Support\Collection;
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
-use Laravel\Scout\Searchable;
 
 class UpstashSearchEngine extends Engine
 {
@@ -139,7 +138,7 @@ class UpstashSearchEngine extends Engine
         return $metadata;
     }
 
-    protected function buildFilter(array $filters): ?string
+    public function buildFilter(array $filters): ?string
     {
         $parts = [];
 
@@ -152,5 +151,31 @@ class UpstashSearchEngine extends Engine
         }
 
         return $parts ? implode(' AND ', $parts) : null;
+    }
+
+    public function lazyMap(Builder $builder, $results, $model)
+    {
+        if ($results['documents'] === []) {
+            return collect();
+        }
+
+        return $model->newCollection($results['documents'])->lazy()->map(function ($hit) use ($model) {
+            return $model->newFromBuilder(
+                $hit['content'] ?? $hit['metadata'] ?? []
+            )->setScoutMetadata([
+                'id' => $hit['id'],
+                'score' => $hit['score'] ?? null,
+            ]);
+        });
+    }
+
+    public function createIndex($name, array $options = [])
+    {
+        return true;
+    }
+
+    public function deleteIndex($name)
+    {
+        return app(UpstashSearchClient::class)->index($name)->reset();
     }
 }

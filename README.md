@@ -65,6 +65,10 @@ $results = Post::search('laravel')->paginate(15);
 php artisan scout:upstash-import "App\Models\Post"
 ```
 
+## Documentation
+
+For more information on Upstash Search, visit the [Upstash Search Documentation](https://upstash.com/docs/search).
+
 ## License
 
 MIT

@@ -32,5 +32,10 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "audit": {
+            "block-insecure": false
+        }
     }
 }
