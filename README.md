@@ -72,3 +72,7 @@ For more information on Upstash Search, visit the [Upstash Search Documentation]
 ## License
 
 MIT
+
+## Support
+
+Support my open source work and help fund this project on [FLOSS Africa](https://flossafrica.com/m/ossycodes).
