@@ -75,4 +75,4 @@ MIT
 
 ## Support
 
-Support my open source work and help fund this project on [FLOSS Africa](https://flossafrica.com/m/ossycodes).
+[![Fund my work on FLOSSAfrica](https://flossafrica.com/badge.svg)](https://flossafrica.com/m/ossycodes?p=laravel-scout-upstash-search)
